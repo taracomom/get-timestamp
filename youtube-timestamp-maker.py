@@ -5,6 +5,9 @@ import tempfile
 import zipfile  # 追加
 from io import BytesIO
 import base64
+import streamlit.components.v1 as components
+
+st.set_page_config(page_title="チャプター作成お助けツール", page_icon=":camera:", layout="wide")
 
 def ms_to_hms(ms):
     seconds = int((ms / 1000) % 60)
@@ -99,7 +102,6 @@ def get_binary_file_downloader_html(bin_file, file_label='File'):
     return href
 
 def main():
-    st.set_page_config(page_title="チャプター作成お助けツール", page_icon=":camera:", layout="wide")
     st.title("チャプター作成お助けツール")
 
     # 説明を追加
@@ -119,5 +121,12 @@ def main():
         else:
             process_video(video_file, max_frames, threshold)
 
+# HTMLとしてJavaScriptを含むスクリプトタグを追加
+script_html = """
+<script async data-uid="7549b48e01" src="https://aidesignlab.ck.page/7549b48e01/index.js"></script>
+"""
+
+# StreamlitアプリにHTMLコンテンツを埋め込む
+components.html(script_html, height=0)
 if __name__ == "__main__":
     main()
