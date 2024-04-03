@@ -107,6 +107,17 @@ def main():
     # 説明を追加
     st.write("アップロードした動画の中でフレームに大きく変化があった箇所のフレーム画像とタイムスタンプを取得し、表示します。")
     st.write("スライドを使った動画のチャプター作成に便利です。JPGのダウンロードもできます。")
+
+    # 名前とTwitterリンクを表示するHTMLコンテンツ
+    footer_html = """
+    <div style="position: fixed; bottom: 10px; left: 10px; background-color: white; padding: 10px; border-radius: 10px;">
+        <a href="https://twitter.com/chibinftcom" target="_blank">作成者：うみの（AIとNFTの専門家）</a>
+    </div>
+    """
+
+    # Streamlitアプリにフッターを埋め込む
+    components.html(footer_html, height=100)
+
     # 閾値の設定
 
     threshold = st.sidebar.slider("フレームの変化の閾値", 1, 50, 20)
@@ -121,12 +132,6 @@ def main():
         else:
             process_video(video_file, max_frames, threshold)
 
-# HTMLとしてJavaScriptを含むスクリプトタグを追加
-script_html = """
-<script async data-uid="7549b48e01" src="https://aidesignlab.ck.page/7549b48e01/index.js"></script>
-"""
 
-# StreamlitアプリにHTMLコンテンツを埋め込む
-components.html(script_html, height=0)
 if __name__ == "__main__":
     main()
